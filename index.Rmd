@@ -8,11 +8,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 ## knitr options
-opts_chunk$set(
-    cache = TRUE,
-    tidy = FALSE,
-    comment = NA
-)
+opts_chunk$set()
 
 ```
 
