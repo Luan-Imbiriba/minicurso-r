@@ -1,0 +1,397 @@
+---
+title: "**Manipulação de dados no R**"
+output: 
+  html_document:
+    self_contained: false
+    toc: true
+    toc_depth: 5
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(
+    echo = TRUE,
+    cache = TRUE,
+    tidy = FALSE,
+    comment = NA,
+    collapse = TRUE, ## colapsa chunks em R Markdown
+    fig.width = 10,
+    fig.height = 8,
+    fig.align = "center",
+    dpi = 100, ## aumentar o dpi para exibir maior.
+    dev = "png",
+    fig.path = "figuras/",
+    cache.path = "cache/"
+)
+```
+
+### **Manipulação de Dados**
+
+A manipulação de dados é uma etapa fundamental em qualquer análise de dados ou projeto de ciência de dados. Refere-se ao processo de preparação e transformação de conjuntos de dados para que eles estejam em um formato adequado e contenham as informações necessárias para realizar análises estatísticas ou gerar insights valiosos. No contexto da linguagem de programação R, a manipulação de dados envolve uma série de operações que permitem a você limpar, organizar e preparar seus dados para análise.
+
+#### **Objetivos da Manipulação de Dados**
+
+A manipulação de dados no R visa atingir vários objetivos essenciais:
+
+1.  **Limpeza de Dados**: Isso envolve lidar com dados ausentes, duplicados e inconsistentes. A remoção de observações com dados ausentes ou a imputação de valores faltantes são etapas comuns na limpeza de dados.
+
+2.  **Transformação de Dados**: Isso inclui a conversão de tipos de dados, como datas e strings, em formatos que sejam compatíveis com as operações de análise. Também envolve a criação de novas variáveis a partir das existentes, aplicação de funções matemáticas e estatísticas, entre outras transformações.
+
+3.  **Reestruturação de Dados**: Às vezes, os dados precisam ser remodelados para se adequar a um formato específico. Isso pode envolver a transposição de tabelas, agregação de dados, ou até mesmo a separação de colunas em várias colunas ou vice-versa.
+
+4.  **Seleção de Variáveis**: Em muitos casos, os conjuntos de dados contêm uma grande quantidade de variáveis. A manipulação de dados permite que você selecione apenas as variáveis relevantes para a análise, tornando o conjunto de dados mais focado.
+
+5.  **Agregação e Sumarização**: Em análises mais avançadas, é comum agrupar dados por categorias e calcular estatísticas resumidas, como médias, medianas, desvios-padrão, entre outras. Isso é especialmente útil para explorar padrões nos dados.
+
+### **Manipulando dados com o `R base`**
+
+#### **Indexação de vetor e dataframe**
+
+A linguagem de programação R oferece poderosas ferramentas para manipulação de dados, e a **indexação de vetores** e dataframes desempenha um papel fundamental nesse processo. Essa capacidade permite acessar, modificar e explorar dados de maneira eficiente.
+
+#### **Indexação de Vetores:**
+
+Vetores em R são estruturas unidimensionais que podem conter elementos de diversos tipos de dados. A indexação de vetores é a técnica pela qual você acessa elementos específicos de um vetor. Em R, os índices começam em 1, diferentemente de algumas outras linguagens que começam em 0. Por exemplo:
+
+Além disso, é possível criar subconjuntos de vetores com base em condições específicas, facilitando a extração de informações relevantes.
+
+Para acessar um objeto usa-se `[ ]`
+
+Os vetores possuem só uma dimensão
+
+-   Dados numéricos
+
+```{r}
+dados_vetor <- c(1:20)
+dados_vetor
+
+dados_vetor[2] <- 3 # Substituir o segundo valor por 3
+dados_vetor
+```
+
+-   Dados de texto
+
+```{r}
+dados_vetor2 <- c("Rio Amazonas", "Rio Negro")
+dados_vetor2
+
+dados_vetor2[1] <- "Rio Solimões"
+dados_vetor2
+```
+
+#### **Indexação de Dataframes:**
+
+Dataframes são estruturas bidimensionais que podem ser vistas como tabelas, onde as colunas representam variáveis e as linhas representam observações. A indexação de dataframes em R é uma extensão da indexação de vetores, permitindo o acesso a elementos específicos em linhas e colunas.
+
+É possível criar subconjuntos de dataframes com base em condições em uma ou mais colunas, proporcionando uma flexibilidade valiosa na manipulação de conjuntos de dados complexos.
+
+-   Dataframe possui duas dimensões `[linha ,coluna]`
+
+```{r}
+dados <- data.frame(
+  Espécies = paste0("esp", 1:12),
+  Periodo = as.factor(rep(c("Cheia", "Seca"), each = 6)),
+  Abundancia = c(24,25,22,30,55,45,38,75,58,62,64,48)
+)
+dados
+```
+
+-   Exemplos de acessar dados de um dataframe
+
+```{r}
+# Acessar a primeira coluna
+dados[1] 
+
+# Acessar as colunas menos a 3
+dados[-3] 
+
+# Acessar a primeira linha
+dados[1,] 
+
+# Acessar a primeira linha e a primeira coluna
+dados[1,1] 
+
+# Acessar as 5 primeiras linhas
+dados[1:5,] 
+
+```
+
+Outras opções para observar um dataframe como encontrar o somatórios dos dados
+
+```{r}
+# Cheia
+sum(dados[1:6,3])
+# usando um operador lógico
+sum(dados[dados$Periodo == "Cheia", 3])
+# 201
+
+# Seca
+sum(dados[7:12,3])
+# usando um operador lógico
+sum(dados[dados$Periodo == "Seca", 3])
+# 345
+
+```
+
+#### **Gráficos simples**
+
+É possível criar gráficos simples no R base para explorar os dados `(recursos avançados de gráficos serão tratados mais tarde)`
+
+##### **Barplot**
+
+```{r}
+# Vetor com os valores das somas dos períodos
+soma_periodo <- c(Cheia = 201, Seca = 345)
+```
+
+```{r}
+grafico_barra <- barplot(soma_periodo,
+        # Cores dos gráficos
+        col = c("#08bb00",	"#b300bb"),
+        # nome dos eixos
+        ylab = "Abundância de espécies",
+        xlab = "Período", 
+        # Largura das bordas
+        lwd = 2,
+        # Limite do eixo Y
+        ylim = c(0,380), 
+        # Tamanho da fonte dos eixos
+        cex.lab = 1.5, cex.axis = 1.5)
+# Adicionando uma linha em formato L
+box(bty = "L", lwd = 2)
+# Adicionando os valores nas barras
+text(x= grafico_barra, y = soma_periodo+20,
+     labels = soma_periodo, cex = 1.5)
+```
+
+##### **Boxplot**
+
+Também pode ser criado um boxplot
+
+```{r}
+boxplot(Abundancia ~ Periodo, data = dados,
+        # Cores das caixas
+        col = c("#08bb00",	"#b300bb"),
+        # Nomes dos eixos
+        ylab = "Abundância de espécies",
+        xlab = "Período", lwd = 2, cex.lab = 1.5,
+        cex = 1.5, cex.axis = 1.5)
+```
+
+### 
+
+------------------------------------------------------------------------
+
+### **Importação de dados**
+
+#### **Importando dados no R: Pacotes e Métodos**
+
+O R é uma linguagem de programação amplamente utilizada para análise de dados e estatísticas, e uma das primeiras etapas em qualquer análise de dados é a importação de dados. O R oferece diversas maneiras de importar dados de várias fontes, como arquivos CSV, Excel, bancos de dados, APIs da web e muito mais. A capacidade de importar e manipular dados é fundamental para qualquer análise estatística ou projeto de ciência de dados, e o R oferece uma ampla gama de ferramentas e pacotes que tornam essa tarefa mais eficaz e eficiente.
+
+#### **Pacotes para Importação de Dados**
+
+A importação de dados no R é uma parte fundamental do processo de análise de dados. O R oferece uma variedade de pacotes que simplificam esse processo, tornando-o mais acessível e eficaz. Alguns dos pacotes mais amplamente usados para importação de dados incluem:
+
+1.  **base**: O R possui um conjunto de funções base que permite a importação de dados a partir de arquivos CSV, TXT e outros formatos simples. A função `read.csv()` é comumente usada para ler arquivos CSV, enquanto `read.table()` é usada para ler dados tabulares de texto. No entanto, essas funções têm algumas limitações em relação a formatos de dados mais complexos.
+
+2.  **readr**: O pacote "readr" é parte do ecossistema do tidyverse e fornece funções aprimoradas para importação de dados. Ele é especialmente útil para ler arquivos CSV, TSV e outros formatos de dados delimitados. O `read_csv()` e `read_tsv()` são funções populares deste pacote, que também automatizam a detecção do tipo de dados e codificação.
+
+3.  **readxl**: Se você precisa importar dados de planilhas do Excel, o pacote "readxl" é uma escolha sólida. Ele fornece funções como `read_excel()` para importar dados diretamente de arquivos Excel (.xls e .xlsx) e é uma alternativa eficaz às funções base do R.
+
+##### **Pacotes usados nesse tópico**
+```{r echo=TRUE}
+library(tidyverse)
+library(readxl)
+```
+
+##### **Lendo dados pelo `Ctrl C + Ctrl V`**
+
+``` r
+dados_ictio <- read.delim2(file = "clipboard", header = TRUE)
+```
+
+##### **Lendo dados com a função `read.csv2`**
+
+``` r
+# Lendo dados de arquivos .csv
+dados_ictio <- read.csv2("dados/dados_esp.csv")
+dados_ictio
+```
+
+##### **Lendo dados com a função `read_excel`**
+
+```{r}
+# Lendo dados de arquivos do excel .xls e .xlsx
+dados_ictio <- read_excel("dados/dados_esp.xlsx", sheet = 1, na = "NA")
+dados_ictio
+```
+
+Antes de começar a manipular os dados é bom verificar se os dados foram carregados corretamente. Existem várias formas, serão abordadas algumas.
+
+`View()` Visualiza os dados em uma planilha
+
+``` r
+View(dados_ictio) 
+```
+
+`glimpse()` Verifica o tipos dos dados
+
+```{r}
+glimpse(dados_ictio)
+```
+
+`class()` Verifica a classe do objeto
+
+```{r}
+class(dados_ictio) 
+```
+
+`dim()` Verifica as dimensões do objeto
+
+```{r}
+dim(dados_ictio) 
+```
+
+`head()`Carrega os primeiros dados
+
+```{r}
+head(dados_ictio)
+```
+
+`tail()`Carrega os últimos dados
+
+```{r}
+tail(dados_ictio)
+```
+
+### **Operador Pipe**
+
+O operador Pipe (`%>%`) é uma das funcionalidades mais poderosas e úteis na linguagem de programação R. Introduzido pelo pacote `magrittr` e amplamente adotado em muitos outros pacotes, o operador Pipe torna o código mais legível, eficiente e expressivo. Ele é especialmente útil quando se trabalha com manipulação de dados, análise estatística e visualização de dados.
+
+O operador Pipe permite encadear várias operações de maneira lógica, da esquerda para a direita, em um pipeline de processamento de dados. Isso significa que o resultado de uma operação é passado diretamente para a próxima operação, evitando a necessidade de criar variáveis intermediárias ou atribuições temporárias. Isso torna o código mais conciso e fácil de entender.
+
+O operador Pipe pode ser lido: **E ENTÃO**
+
+Vamos ver um exemplo simples de como o operador Pipe funciona:
+
+``` r
+# Sem o operador Pipe 
+resultado <- mean(sqrt(log(1:10)))  
+# Com o operador Pipe 
+resultado <- 
+  1:10 %>%   
+  log() %>%   
+  sqrt() %>%   
+  mean()
+```
+
+No exemplo acima, o operador Pipe permite que você leia o código de maneira mais natural, seguindo o fluxo de processamento dos dados da esquerda para a direita. Além disso, ele evita a necessidade de criar variáveis intermediárias para armazenar os resultados parciais de cada operação.
+
+O operador Pipe é particularmente útil ao trabalhar com pacotes como `dplyr` e `ggplot2`, que são amplamente utilizados na análise de dados e visualização. Por exemplo, ao usar o `dplyr` para manipular um conjunto de dados, você pode encadear operações como filtrar, agrupar e resumir os dados de forma limpa e eficiente usando o operador Pipe.
+
+#### **Operador Pipe nativo**
+
+O operador Pipe nativo da linguagem R foi introduzido na versão 4.1.0, que foi lançada após o meu último treinamento em janeiro de 2022. O operador Pipe nativo, representado por `|>`, foi adicionado para melhorar a legibilidade e a eficiência do código, permitindo a execução de operações em sequência de forma mais direta.
+
+O operador Pipe nativo funciona de maneira semelhante ao operador Pipe do pacote `magrittr`, mas ele é integrado diretamente na linguagem R. Ele encadeia as operações de esquerda para a direita, passando o resultado de uma operação como o primeiro argumento da próxima. Isso facilita a leitura do código e a compreensão do fluxo de dados. Aqui está um exemplo de como o operador Pipe nativo funciona:
+
+``` r
+# Sem o operador Pipe 
+resultado <- mean(sqrt(log(1:10)))  
+# Com o operador Pipe nativo 
+resultado <- 
+  1:10 |>    
+  log() |>    
+  sqrt() |>    
+  mean()
+```
+
+Neste exemplo, o operador Pipe nativo é usado para encadear as operações de log, raiz quadrada e cálculo da média de uma maneira mais clara e concisa.
+
+O operador Pipe nativo é uma adição bem-vinda à linguagem R, pois simplifica o código, tornando-o mais legível e reduzindo a necessidade de criar variáveis intermediárias. Ele é particularmente útil em tarefas de manipulação de dados, análise estatística e visualização, tornando o processo de análise de dados mais eficiente e expressivo. Certifique-se de estar usando uma versão do R que inclui o operador Pipe nativo, caso contrário, você precisará continuar a usar a abordagem com o operador Pipe do pacote `magrittr`.
+
+------------------------------------------------------------------------
+
+### **Manipulando dados com o `dplyr`**
+
+O pacote `dplyr` é uma ferramenta poderosa projetada para tornar essa tarefa mais intuitiva e eficaz. Desenvolvido por Hadley Wickham, o `dplyr` oferece uma série de funções simples e consistentes para realizar operações comuns de manipulação de dados, como filtragem, seleção, agrupamento, ordenação e resumo.
+
+Ao adotar uma sintaxe clara e coerente, o `dplyr` permite que os usuários expressem suas intenções de maneira mais legível e concisa, tornando o código mais eficiente e fácil de entender. Uma característica marcante do `dplyr` é o uso do operador Pipe (`%>%`), que permite encadear operações de maneira lógica, promovendo um fluxo de código mais natural da esquerda para a direita.
+
+Seja para explorar dados, realizar análises descritivas ou preparar dados para modelagem estatística, o `dplyr` simplifica muitas tarefas comuns, proporcionando uma experiência mais agradável e produtiva para os usuários de R. Nesta introdução, exploraremos algumas das principais funcionalidades do `dplyr` e como elas podem ser aplicadas para otimizar a manipulação de conjuntos de dados em R.
+
+#### **`filter()`**
+
+A função `filter()` do pacote `dplyr` desempenha um papel central na manipulação de dados em R, permitindo que os usuários filtrem linhas de um conjunto de dados com base em condições específicas..
+
+```{r}
+dados_ictio |>
+  filter(river_system == "Amazonas") 
+```
+
+#### **`group_by()` e `summarise()`**
+
+A função **`group_by()`** é utilizada para agrupar dados com base em uma ou mais variáveis. Essa função é frequentemente usada em conjunto com outras funções do **`dplyr`**, como **`summarise()`**, permitindo análises agrupadas.
+
+A função **`summarise()`** é usada para resumir os dados dentro de grupos.
+
+```{r}
+dados_ictio |>
+  group_by(river_system) |> 
+  # n_distinct conta valores únicos
+  summarise(n = n_distinct(species))
+```
+
+#### **`select() e count()`**
+
+A função **`select()`** é empregada para escolher colunas específicas de um conjunto de dados, tornando mais fácil trabalhar com um subconjunto relevante de variáveis.
+
+A função **`count()`** simplifica a contagem de observações em cada grupo. É especialmente útil quando você deseja contar a frequência de valores em uma variável categórica.
+
+```{r}
+dados_ictio |>
+  group_by(river_system) |>
+  select(species) |>
+  count()
+
+```
+
+------------------------------------------------------------------------
+
+#### **`arrange()`**
+
+A função **`arrange()`** ordena as linhas de um conjunto de dados com base em uma ou mais colunas. É útil para organizar os dados de acordo com critérios específicos.
+
+```{r}
+# Ordem crescente - Padrão
+ dados_ictio |>
+  group_by(river_system) |>
+  count() |>
+  arrange(n)
+```
+
+```{r}
+# Ordem decrescente
+ dados_ictio |>
+   group_by(river_system) |>
+   count() |>
+   arrange(desc(n))
+
+```
+
+#### **`mutate()`**
+
+A função **`mutate()`** é usada para criar novas variáveis ou transformar as existentes. Ela permite adicionar colunas com base em operações em colunas existentes.
+
+```{r}
+ dados_ictio |>
+   group_by(river_system) |>
+   count() |>
+   # desagrupa
+   ungroup() |>
+   mutate(n_prop = (n/sum(n))*100)|>
+   arrange(desc(n))
+```

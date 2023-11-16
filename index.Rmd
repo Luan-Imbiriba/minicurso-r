@@ -1,0 +1,33 @@
+---
+title: "<b>Noções básicas de linguagem R aplicadas à biologia aquática</b>"
+output:
+  html_document:
+    toc: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+## knitr options
+opts_chunk$set(
+    cache = TRUE,
+    tidy = FALSE,
+    comment = NA
+)
+
+```
+
+Esse minicurso faz parte da programação do [**V Simpósio de Biologia Aquática e Pesca na Amazônia**](https://doity.com.br/v-simposio-de-biologia-aquatica-e-pesca-na-amazonia), realizado em Manaus, AM, Brasil, de 14 a 17 de novembro de 2023.
+
+### Ministrantes:
+[**Luan Campos Imbiriba**](http://lattes.cnpq.br/2201358403322252)
+<br>
+[**MSc. Ândrocles Oliveira Borges**](http://lattes.cnpq.br/7531576890292039)
+
+<br>
+<br>
+A linguagem R é uma ferramenta poderosa e altamente versátil que desempenhou um papel significativo na evolução da análise de dados e estudos ecológicos nas últimas décadas. Esta linguagem de programação estatística foi criada por Ross Ihaka e Robert Gentleman na Universidade de Auckland, na Nova Zelândia, no início dos anos 90. Desde então, ela tem se tornado uma das linguagens mais populares no campo das ciências biológicas e áreas afins.
+
+A linguagem R vem se popularizando nos últimos anos devido à sua capacidade de lidar com diversos tipos de dados. É uma das linguagens de programação mais utilizadas em ciências biológicas. Oferece uma solução flexível e acessível para os cientistas que buscam explorar, modelar e comunicar seus resultados de forma eficaz. Possibilita uma ampla gama de pacotes e recursos para criar visualizações de dados de alta qualidade, ajudando os estudantes a apresentar seus resultados. Além disso, possui a capacidade de realizar análises estatísticas complexas, sua gratuidade a tornam uma ferramenta acessível promovendo uma ciência aberta para a comunidade científica, trazendo melhorias para a reprodutibilidade das análises.
+
+Sendo assim, o objetivo desse minicurso é fazer uma introdução ao uso da linguagem R para estudantes de ciências biológicas e áreas afins, visando ensinar os passos básicos para tratamentos, visualização e análises de dados com o foco em estudos relacionados à biologia aquática. 
+

@@ -1,0 +1,27 @@
+name: "minicurso"
+# output_dir: "docs"
+exclude: ["_site.yml"]
+output:
+  html_document:
+    theme: united
+    highlight: tango
+    toc: 
+    toc_depth: 4
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    css: [setup/sitestyle.css]
+    includes:
+      after_body: setup/footer.html
+navbar:
+  title: "Minicurso R"
+  left:    
+    - icon: fa-home
+      text: "Apresentação"
+      href: index.html
+    - text: "Introdução"
+      href:  aula1.html
+    - text: "Manipulação de dados"
+      href:  aula2.html
+    - text: "Análises de dados"
+      href:  aula3.html

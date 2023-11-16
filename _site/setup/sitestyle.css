@@ -1,0 +1,324 @@
+body, td{
+    font-family: 'Lato', sans-serif;
+    background-color: #ffffff;
+    font-size: 16px;
+    text-align: none;
+}
+
+body {
+    margin: auto;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: inherit;
+    color: #810061;
+    font-style: bold;
+}
+
+.text-body{
+    color: #000000
+}
+
+h1.title {
+    font-size: 25px;
+    color: #070661;
+}
+
+h1.toc-ignore {
+    font-size: 42px;
+}
+
+.section h1 {
+    margin-top: -40px !important;
+}
+
+.section h2 {
+    margin-top: -26px !important;;
+}
+
+.h1, .h2, .h3, h1, h2, h3 {
+    /* margin-top: 3px !important; */
+    margin-bottom: 20px;
+    
+}
+
+
+
+
+
+/* Cores ------------------------------------ */
+
+/* Sidebar------------------------- */
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus {
+    background-color: #057a22;
+    border-color: #660231;
+}
+
+p {
+    color:#000000
+}
+/* Barra de navegação------------------------- */
+
+.navbar-default {
+    background-color: #007519;
+    border-color: var(--one-color);
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    background-color: #00743e;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    background-color: #003a0d;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #a6e22e;
+    background-color:  transparent
+}
+
+.navbar-default .navbar-brand:hover,.navbar-default .navbar-brand:focus {
+    color: #a6e22e;
+    background-color:  transparent
+}
+
+
+/*Link----------------------------------------*/
+a,
+a:hover,
+a:focus {
+    color: #007a06;
+    text-decoration:solid;
+    text-shadow: #740000;
+    font-style: bold;
+}
+
+
+/* Figuras ---------------------------------- */
+
+img:not([class]) {
+    max-width: 100% !important;
+    margin: auto;
+}
+
+.header img {
+    box-shadow: unset;
+}
+
+/* Código ----------------------------------- */
+
+code {
+    color: #740000;
+    padding: 1px 1px;
+}
+
+
+pre, code.sourceCode { 
+    color: #003000;
+    line-height: 1.25; 
+}
+
+code span.ot{
+    color: #ff0077;
+}
+
+code span.fu{
+    color: #280057;
+    font-weight: normal
+}
+
+code span.at{
+    color: #058c96;
+}
+
+code span.dv{
+    color: #610154;
+}
+
+code span.st{
+    color: #217e05;
+}
+
+pre {
+    color:#000000;
+    background-color:#f3f3f3;
+    border: 1px solid none;
+}
+
+
+pre.sourceCode{
+    background-color: #f3f3f3;
+}
+
+tt, code, pre {
+    font-family: Consolas,monospace;
+    font-size: 16px;
+}
+
+pre code {
+    font-size: 16px;
+}
+
+
+p code,
+table code {
+    font-size: 100%;
+    background-color: #f3f3f3;
+    color: #280057;
+}
+
+/* R input */
+pre, code {
+    background-color: #f3f3f3;
+    color: #000000;
+}
+
+
+/* Comments in gray italic */
+code span.co {
+    color: #0ba317;
+    font-style: italic;
+}
+
+/* R output */
+pre:not([class]) code {
+    background-color: #f3f3f3;
+    
+}
+
+pre:not([class]), code {
+    background-color: #f3f3f3;
+}
+
+
+
+/* TOC -------------------------------------- */
+
+/* The Table of Contents container element */
+.TOC {
+  margin: 25px 0px 20px 0px;
+  line-height: 0px;
+}
+@media (max-width: 500px) {
+.TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+div.main-container {
+  max-width: 800px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 300px;
+  max-height: 50%;
+  line-height: 0px;
+}
+
+
+.tocify {
+    width: 100% !important;
+    max-height: 100%;
+    overflow: auto;
+    margin-left: 0px;
+    position:fixed;
+    border: 1px solid #ccc;
+    border-radius: 10;
+    top: 50px
+}
+
+/* The Table of Contents is composed of multiple nested unordered lists.  These styles remove the default styling of an unordered list because it is ugly. */
+.tocify ul, .tocify li {
+    list-style:inside;
+    margin: 0;
+    padding: 0;
+    border: aqua;
+    line-height: 0px;
+    border-radius: 0;
+}
+
+
+/* Top level header elements */
+.tocify-header strong{
+    text-indent: 0px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 0px;
+}
+
+/* Top level subheader elements.  These are the first nested items underneath a header element. */
+.tocify-subheader strong{
+    text-indent: 0px;
+    font-weight: normal;
+    font-size: 13px;
+}
+
+/* Makes the font smaller for all subheader elements. */
+.tocify-subheader li {
+    font-size: 8px;
+    text-indent: 20px;
+}
+
+/* Further indents second level subheader elements. */
+.tocify-subheader .tocify-subheader {
+    text-indent: 30px;
+}
+.tocify-subheader .tocify-subheader .tocify-subheader {
+    text-indent: 40px;
+}
+.tocify-subheader .tocify-subheader .tocify-subheader .tocify-subheader {
+    text-indent: 50px;
+}
+.tocify-subheader .tocify-subheader .tocify-subheader .tocify-subheader .tocify-subheader {
+    text-indent: 60px;
+}
+
+/* Twitter Bootstrap Override Style */
+.tocify .tocify-item > a, .tocify .nav-list .nav-header {
+    margin: 0px;
+}
+
+/* Twitter Bootstrap Override Styles */
+.tocify .tocify-item a, .tocify .list-group-item {
+    padding: 5px;
+    border-radius: 0;
+}
+
+.tocify .nav-pills > li {
+    float:right;
+}
+
+
+hr.footer {
+    border-top: 1px solid #007e26;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+

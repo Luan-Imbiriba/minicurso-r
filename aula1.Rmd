@@ -1,0 +1,347 @@
+---
+title: "**Introdução à Linguagem R**"
+output: 
+  html_document:
+    self_contained: false
+    toc: true
+    toc_depth: 5
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(tidyverse)
+library(flextable)
+
+opts_chunk$set(
+    echo = TRUE,
+    cache = TRUE,
+    tidy = FALSE,
+    comment = NA,
+    collapse = TRUE, ## colapsa chunks em R Markdown
+    fig.width = 10,
+    fig.height = 8,
+    fig.align = "center",
+    dpi = 100, ## aumentar o dpi para exibir maior.
+    dev = "png",
+    fig.path = "figuras/",
+    cache.path = "cache/"
+)
+
+```
+
+### **O que é a Linguagem R**
+
+O R é um ambiente de software livre para computação estatística e Gráficos. É um ambiente de análise estatística amplamente utilizados em diversas áreas, incluindo as ciências biológicas. Criada por Ross Ihaka e Robert Gentleman na década de 1990 e tem ganhado destaque como uma das ferramentas mais populares para cientistas de dados, estatísticos e analistas de dados em todo o mundo. Ela se destaca por sua flexibilidade e extensibilidade, o que a torna uma escolha popular para a análise de dados complexos e a geração de resultados confiáveis. A ferramenta oferece uma rica coleção de pacotes e funções que permitem aos cientistas de dados e pesquisadores realizar uma ampla variedade de tarefas, desde análises estatísticas avançadas até a criação de gráficos personalizados. Sua comunidade ativa e colaborativa contribui para o constante desenvolvimento de recursos e pacotes. Como uma linguagem de programação, o R permite automatizar tarefas, escrever scripts personalizados e criar fluxos de trabalho de análise de dados eficientes. Ele também é capaz de lidar com grandes conjuntos de dados e é uma ferramenta poderosa para a exploração, visualização e interpretação de informações em ciências biológicas e outras áreas. Com uma comunidade ativa de desenvolvedores que criam pacotes e extensões para atender a diversas necessidades, o R oferece uma plataforma poderosa para explorar, modelar e comunicar informações a partir de dados, tornando-o uma escolha valiosa para profissionais que trabalham com análise de dados e estatísticas.
+
+#### **Vantagens de Aprender o R**
+
+Aprender a Linguagem R oferece uma série de vantagens significativas, especialmente para profissionais e estudantes em ciências biológicas. Aqui estão algumas das principais vantagens:
+
+-   **Flexibilidade e Extensibilidade:** R é uma linguagem altamente flexível, que permite realizar uma ampla variedade de tarefas relacionadas à análise de dados. Além disso, sua extensibilidade significa que você pode criar suas próprias funções e pacotes, tornando-o adequado para abordar problemas específicos das ciências biológicas.
+
+-   **Comunidade Ativa:** R possui uma comunidade ativa de desenvolvedores e usuários, o que significa que há uma grande quantidade de recursos, pacotes e suporte disponíveis. Isso facilita a resolução de problemas e o aprendizado contínuo.
+
+-   **Visualização de Dados:** R oferece recursos avançados de visualização de dados, permitindo criar gráficos informativos e publicáveis. Isso é particularmente útil em ciências biológicas, onde a representação visual de resultados é crucial.
+
+-   **Análise Estatística:** R é uma poderosa ferramenta para análise estatística. Ele inclui uma ampla gama de funções estatísticas e técnicas avançadas que são essenciais para a análise de dados em ciências biológicas.
+
+-   **Integração com Outras Ferramentas:** R é altamente integrado com outras ferramentas e linguagens de programação. Isso permite a importação e exportação de dados de várias fontes, facilitando a colaboração e o uso de diferentes recursos.
+
+-   **Código Aberto e Gratuito:** R é uma linguagem de programação de código aberto e, portanto, é gratuito para uso. Isso o torna acessível para estudantes, pesquisadores e instituições acadêmicas.
+
+### **Introdução ao RStudio**
+
+O RStudio é uma das ferramentas mais populares e poderosas para desenvolvimento e análise de dados com a linguagem de programação R. É uma IDE (Ambiente de Desenvolvimento Integrado) projetada especificamente para atender às necessidades dos usuários do R, desde cientistas de dados e estatísticos até analistas e pesquisadores. O RStudio oferece uma interface amigável e eficiente que simplifica o processo de escrever, depurar, testar e documentar código R, além de fornecer recursos poderosos para visualização de dados, criação de relatórios e colaboração em projetos.
+
+Através de sua interface organizada em painéis, o RStudio permite que os usuários acessem o console do R, editem scripts, gerenciem projetos, visualizem gráficos, acessem ajuda e documentação, além de oferecer controle de versão integrado e suporte a pacotes. Ele é altamente personalizável e se adapta às necessidades individuais dos usuários.
+
+O RStudio tem se destacado como uma ferramenta essencial no universo da ciência de dados, facilitando o trabalho com o R e contribuindo para a produtividade e eficácia na análise de dados, modelagem estatística e criação de visualizações de alta qualidade. Com uma comunidade ativa de usuários e desenvolvedores, o RStudio continua evoluindo e agregando recursos para atender às demandas crescentes no campo da análise de dados. Neste contexto, explorar o RStudio é fundamental para aqueles que buscam aproveitar ao máximo a linguagem R em suas atividades profissionais e projetos de pesquisa.
+
+#### **Atalhos Úteis no RStudio**
+
+-   `Ctrl + Enter` - Executa o comando ativo no script ou console.
+-   `Ctrl + Shift + C` - Comenta ou descomenta as linhas selecionadas no script.
+-   `Ctrl + L` - Limpa o console.
+-   `Tab` - Completa automaticamente funções, nomes de variáveis e argumentos.
+-   `F1` - Abre a documentação de ajuda para a função ou pacote em foco.
+-   `Ctrl +Shift + A` - Arruma o script selecionado.
+-   `Ctrl + Shift + M`: Ativa o operador pipe.
+-   `Ctrl + Shift + R`: Cria uma seção.
+-   `Alt + -`: Ativa o operador de atribuição.
+
+Estes atalhos ajudam a aumentar a eficiência no RStudio e facilitam a navegação e a execução de comandos. À medida que você se familiariza com esses atalhos, você economizará tempo e poderá se concentrar mais na análise de dados em vez de navegar pela interface.
+
+### **Boas Práticas no Uso da Linguagem R**
+
+O R é uma linguagem de programação `"case sensitive"`, o que significa que ele faz distinção entre maiúsculas e minúsculas em nomes de objetos, variáveis, funções e comandos. Isso tem implicações importantes no modo como você escreve código e interage com a linguagem. Aqui estão alguns pontos-chave relacionados ao fato de o R ser case sensitive:
+
+**Diferenciação entre Nomes:** No R, "pirarucu" e "Arapaima" são tratados como nomes diferentes. Portanto, `pirarucu` e `Arapaima` seriam objetos diferentes. Isso significa que você deve ser consistente ao usar letras maiúsculas e minúsculas ao nomear variáveis, funções e objetos.
+
+**Chamada de Funções:** Ao chamar funções, é importante corresponder exatamente ao nome da função, incluindo maiúsculas e minúsculas. Por exemplo, `mean()` é uma função diferente de `Mean()`.
+
+**Acesso a Atributos de Objetos:** Quando você trabalha com objetos complexos, como data frames ou listas, a distinção entre maiúsculas e minúsculas se estende aos nomes das colunas ou elementos. Por exemplo, `especie$arapaima_gigas` e `especie$Arapaima_gigas` se referem a colunas diferentes em um data frame.
+
+**Erros Comuns:** Erros de digitação em nomes de variáveis, funções ou objetos são comuns e podem ser difíceis de identificar, especialmente em scripts mais longos. A verificação de consistência nas letras maiúsculas e minúsculas é importante para evitar tais erros.
+
+#### **Nomeação de Variáveis**
+
+Embora o R seja case sensitive, ele permite uma ampla flexibilidade na nomenclatura. Você pode escolher um estilo de nomenclatura que funcione melhor para você, seja o estilo `"snake_case"` (todas as letras minúsculas com underscores), `"camelCase"` (inicial maiúscula, sem espaços ou underscores) ou outro estilo.
+
+Ex:
+
+-   `eu_uso_snake_case`
+-   `algunsUsamCamelCase`
+-   `outros.usam.pontos`
+-   `E_Alguns.naoLigamParaa_Convencao`
+
+#### **Operadores básicos do R**
+
+O R oferece uma variedade de operadores para realizar diversas operações em valores e variáveis. Abaixo, estão alguns dos operadores mais comuns no R:
+
+**Operadores Aritméticos:**
+
+-   `+`: Adição.
+
+```{r}
+1993 + 30
+```
+
+-   `-`: Subtração.
+
+```{r}
+2023 - 1993
+```
+
+-   `*`: Multiplicação.
+
+```{r}
+88 * 200
+```
+
+-   `/`: Divisão.
+
+```{r}
+303 / 2
+```
+
+-   `^` ou `**`: Exponenciação.
+
+```{r}
+2 ^ 8
+2 ** 8
+```
+
+**Operadores de Comparação:**
+
+-   `==`: Igual a.
+
+```{r}
+2 == 2
+```
+
+-   `!=`: Diferente de.
+
+```{r}
+2 != 2 
+```
+
+-   `>`: Maior que.
+
+```{r}
+5 > 2
+```
+
+-   `<`: Menor que.
+
+```{r}
+5 < 2
+```
+
+-   `>=`: Maior ou igual a.
+
+```{r}
+5 >=2
+```
+
+-   `<=`: Menor ou igual a.
+
+```{r}
+2 <= 5
+```
+
+**Operadores Lógicos:**
+
+-   `&` ou `&&`: E lógico (elemento a elemento e escalar).
+
+```{r}
+5 > 2 & 2 < 5
+```
+
+-   `|` ou `||`: OU lógico (elemento a elemento e escalar).
+
+```{r}
+5 > 2 | 2 > 5
+```
+
+-   `!`: NÃO lógico (negação).
+
+```{r}
+!5 < 2
+```
+
+Estes são alguns dos operadores mais comuns no R. Lembre-se de que a combinação adequada de operadores é fundamental para realizar operações específicas em seus dados e cálculos. A prática e a familiaridade com esses operadores são essenciais para trabalhar eficazmente com o R.
+
+### **Funções**
+
+O R é uma linguagem de programação estatística e, como tal, possui uma ampla gama de comandos e funções para realizar tarefas específicas. Aqui estão alguns dos comandos básicos e essenciais no R:
+
+#### **Estrutura de uma função**
+
+Uma função no R tem a seguinte estrutura:
+
+`nome_da_funcao(argumento1, argumento2, argumento3..)`
+
+**Funções Matemáticas:**
+
+-   `sqrt()`: Calcula a raiz quadrada.
+
+```{r}
+sqrt(81)
+```
+
+**Ajuda:**
+
+-   `?nome_da_funcao`: Fornece ajuda sobre uma função específica.
+-   ou `help(nome_da_funcao)`
+
+#### **Funções estatísticas**
+
+**Medidas Descritivas:**
+
+-   `mean()`: Calcula a média de um vetor numérico.
+-   `median()`: Calcula a mediana de um vetor numérico.
+-   `sum()`: Calcula a soma dos elementos de um vetor numérico.
+-   `min()`: Encontra o valor mínimo em um vetor.
+-   `max()`: Encontra o valor máximo em um vetor.
+-   `sd()`: Calcula o desvio padrão de um vetor.
+-   `var()`: Calcula a variância de um vetor.
+
+### **Sintaxe básica**
+
+O R é constituído por três componentes essenciais: Variáveis, Comentários e Palavras-chave. As Variáveis têm a função de armazenar dados, enquanto os Comentários desempenham o papel de melhorar a legibilidade do código. Já as Palavras-chave são termos reservados que possuem um significado específico para o compilador, desempenhando um papel crítico na estrutura e funcionalidade do programa.
+
+#### **Variáveis**
+
+A semelhança de outras linguagens de programação, as variáveis no R desempenham o papel de rótulos atribuídos a locais de memória reservados, permitindo o armazenamento de uma ampla variedade de tipos de dados. No contexto do R, a atribuição de valores a variáveis pode ser realizada de três maneiras distintas, oferecendo flexibilidade e versatilidade no tratamento de informações.
+
+-   `=` (Atribuição Simples)
+-   `<-` (Atribuição para a esquerda)
+-   `->` (Atribuição à direita)
+
+*Por convenção usa-se o operador `<-` para criar os objetos e `=` para usar em funções*
+
+O funcionamento do operador de atribuição é o seguinte:
+
+``` r
+colocar aqui <- oque tiver aqui
+```
+
+Para atribuir vários dados usa-se o operador de concatenação `c()`
+
+```{r}
+uma_espécie_coletada <- 1
+uma_espécie_coletada
+
+especies_coletadas <- c(5, 20, 12, 29)
+especies_coletadas
+```
+
+#### **Comentários**
+
+Comentários desempenham um papel essencial na aprimoração da clareza e compreensão do seu código. Eles são direcionados exclusivamente aos usuários e são ignorados pelo interpretador. No contexto de R, é possível criar comentários de uma única linha utilizando o símbolo `#` no início da instrução.
+
+```{r}
+# Tudo que se escreve após o símbolo #, o interpretador não lê
+especies_coletadas <- c(5, 20, 12, 29) # Espécies coletadas no rio
+especies_coletadas <- c(2, 10, 5, 52) # Espécies coletadas no lago
+```
+
+#### **Palavras-chave**
+
+Palavras-chave são termos reservados por um programa devido ao seu significado especial. Como resultado, uma palavra-chave não pode ser empregada como nome de variável, função, ou em outros contextos semelhantes.
+
+O R possui várias palavras reservadas que não podem ser usadas como nomes de variáveis, funções ou outros objetos em seu código. Algumas das palavras-chave mais comuns no R incluem:
+
+|      |        |          |         |         |     |
+|------|--------|----------|---------|---------|-----|
+| if   | else   | repeat   | while   | for     | in  |
+| next | break  | function | NULL    | NA      | Inf |
+| NaN  | TRUE   | FALSE    | and     | or      | not |
+| as   | switch | class    | library | require |     |
+
+Lembre-se de que essas palavras-chave são sensíveis a maiúsculas e minúsculas, portanto, "if" é uma palavra-chave, mas "If" ou "IF" não são. Evite usar essas palavras reservadas como nomes para objetos em seu código para evitar conflitos e erros.
+
+### **Tipos de Dados e estrutura de dados**
+
+#### **Objetos**
+
+No R, um objeto é uma instância de uma estrutura de dados que contém informações ou valores. Os objetos são usados para armazenar, manipular e organizar dados e resultados de cálculos. Cada objeto tem um nome que serve para identificá-lo e referenciá-lo em operações subsequentes.
+
+Existem várias estruturas de dados no R, como vetores, matrizes, listas, data frames e muito mais, e cada uma delas pode ser usada para criar objetos. Essas estruturas de dados podem conter elementos de diferentes tipos (números, caracteres, lógicos, etc.) e podem ser nomeadas de forma personalizada.
+
+A criação de objetos no R é uma parte fundamental da programação e análise de dados. Os objetos podem representar informações, como conjuntos de dados brutos, resultados de análises estatísticas, gráficos, funções e muito mais. Aqui estão alguns exemplos de como criar objetos em R:
+
+#### **Tipos de Dados**
+
+-   Números racionais (numeric/double). `c(1,2,5, 1.2,6,8.10)`
+-   Texto (character). `c("bodó","pirarucu","sardinha","jaraqui")` Para escrever textos usa-se aspas `" "`
+-   Lógicos (logical). `c(TRUE, FALSE)`
+-   Inteiros (integer). `c(1L, 2L)`
+
+#### **Estrutura de Dados**
+
+1.  **Vetores:**
+
+    -   Vetores são a estrutura de dados mais fundamental no R. Eles podem conter elementos do mesmo tipo (números inteiros, números reais, caracteres, lógicos) e são criados com a função `c()`.
+
+```{r}
+riqueza_esp <- c(25, 30, 35, 40)
+riqueza_esp
+
+nome_esp <- c("pirarucu","bodó","jaraqui","pacu")
+nome_esp
+```
+
+2.  **Matriz:**
+
+-   Matrizes são semelhantes a vetores, mas têm dimensões, ou seja, podem ser bidimensionais. Você pode criar matrizes usando a função `matrix()`.
+
+```{r}
+matriz_dados <- matrix(1:12, nrow = 3, ncol = 4)
+matriz_dados
+```
+
+3.  **Lista:**
+
+-   Listas podem conter elementos de diferentes tipos, incluindo outros vetores, matrizes, listas e até funções. Elas são criadas com a função `list()`.
+
+```{r}
+lista_esp <- list(esp = "pirarucu", riqueza = 30, fase = "adulto")
+lista_esp
+
+```
+
+4.  **Data Frame:**
+
+    -   Data frames são semelhantes a tabelas em um banco de dados. Eles são bidimensionais e podem conter colunas de diferentes tipos. Data frames são frequentemente usados para armazenar dados tabulares e são criados com a função `data.frame()`.
+
+    ```{r}
+    dados <- data.frame(riqueza_esp = c(25, 30, 35, 40), 
+                           nome_esp = c("pirarucu","bodó","jaraqui","pacu"))
+    dados
+    ```
+
+Depois de criar objetos, você pode realizar diversas operações com eles, como realizar cálculos, criar gráficos, realizar análises estatísticas e muito mais. Os objetos no R facilitam o armazenamento e a manipulação de dados, tornando-o uma linguagem poderosa para análise de dados e estatísticas.
