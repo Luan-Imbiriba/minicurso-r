@@ -1,6 +1,6 @@
 name: "minicurso"
 # output_dir: "docs"
-exclude: ["_site.yml"]
+exclude: ["_site.yml", "*.Rmd"]
 output:
   html_document:
     theme: united
